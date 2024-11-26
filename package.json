@@ -21,9 +21,13 @@
     "@jsx-email/plugin-inline": "1.0.1",
     "@jsx-email/plugin-minify": "1.0.1",
     "@jsx-email/plugin-pretty": "1.0.0",
+    "autoprefixer": "10.4.20",
+    "esbuild-sass-plugin": "3.3.1",
     "jsdom": "25.0.1",
-    "jsx-email": "2.3.5",
+    "jsx-email": "2.2.0",
     "npm-run-all": "4.1.5",
+    "postcss": "8.4.49",
+    "postcss-modules": "6.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "sass": "1.78.0"
@@ -35,6 +39,7 @@
     "@types/react-dom": "^18",
     "happy-dom": "14.12.3",
     "typescript": "^5",
+    "typescript-plugin-css-modules": "5.1.0",
     "vitest": "2.0.5"
   },
   "resolutions": {

@@ -1,7 +1,7 @@
 import { defineConfig } from 'jsx-email/config';
 import { pluginSymbol } from 'jsx-email';
 import { parse } from '@adobe/css-tools';
-import {sassPlugin, postcssModules} from 'esbuild-sass-plugin';
+import { sassPlugin, postcssModules } from 'esbuild-sass-plugin';
 import { decodeHTML } from 'entities';
 
 /**
@@ -63,32 +63,29 @@ export const inlinePlugin = {
 
 export const config = defineConfig({
   render: { minify: false },
-  // plugins: [inlinePlugin],
-  // esbuild: {
-    // write: false, // Prevent writing intermediate files to disk
-    // plugins: [
-    //   // sassPlugin({
-    //   //   filter: /\.global\.scss$/,
-    //   //   // type: 'css-text', // Outputs the compiled CSS as a string
-    //   //   inject: true,
-    //   // }),
-    //   sassPlugin({
-    //     filter: /\.module\.scss$/,
-    //     transform: postcssModules({
-    //       getJSON: (cssFileName, json, outputFileName) => {
-    //         // Map styles but avoid emitting the `.css` file
-    //         console.log(cssFileName, json, outputFileName);
-    //       },
-    //       write: false,
-    //     }),
-    //     // type: 'local-css', // Avoid CSS file output
-    //     inject: true, // Automatically inject styles into a <style> tag
-    //     // type: 'local-css'
-    //   }),
-    // ],
-    // loader: {
-    //   '.css': 'text'
-    //   // '.scss': 'css', 
-    // },
-  // },
+  plugins: [inlinePlugin],
+  esbuild: {
+    plugins: [
+      sassPlugin({
+        filter: /\.global\.scss$/,
+        type: 'css-text',
+        // inject: true,
+      }),
+      sassPlugin({
+        filter: /\.module\.scss$/,
+        transform: postcssModules({
+          getJSON: (cssFileName, json, outputFileName) => {
+            // Map styles but avoid emitting the `.css` file
+            console.log(cssFileName, json, outputFileName);
+          },
+          write: false,
+        }),
+        inject: true, // Automatically inject styles into a <style> tag
+      }),
+    ],
+    loader: {
+      '.css': 'js',
+      '.scss': 'css', 
+    },
+  },
 });
